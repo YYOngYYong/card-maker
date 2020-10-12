@@ -16,17 +16,17 @@ const Card_editor = ({ card }) => {
     fileURL,
   } = card;
 
-  const onSubmit = ()=>{
-
+  const onSubmit = (event)=>{
+   
   };
   return (
     <form className={styles.form}>
       <input className={styles.input} type="text" name="name" value={name}/>
       <input className={styles.input} type="text" name="company" value={company}/>
       <select className={styles.select} type="text" name="name" value={theme}>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-        <option value="colorful">Colorful</option>
+        <option value="light">light</option>
+        <option value="dark">dark</option>
+        <option value="colorful">colorful</option>
       </select>
       <input className={styles.input} type="text" name="title" value={title}/>
       <input className={styles.input} type="text" name="email" value={email}/>
