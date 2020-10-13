@@ -8,8 +8,8 @@ import styles from "./maker.module.css";
 
 const Maker = ({ authService }) => {
   //Editor, Preview를 상태관리, 수정하는 함수들이 여기 들어와야 함.
-  const [cards, setCards] = useState([
-    {
+  const [cards, setCards] = useState({
+    '1':{
       id: "1",
       name: "Olaf",
       company: "google",
@@ -19,8 +19,9 @@ const Maker = ({ authService }) => {
       message: "go for it",
       fileName: "olaf",
       fileURL: null,
-    },
-    {
+
+      },
+    '2':{
       id: "2",
       name: "Dobi",
       company: "google",
@@ -30,8 +31,8 @@ const Maker = ({ authService }) => {
       message: "go for it",
       fileName: "dobi",
       fileURL: null,
-    },
-    {
+      },
+    '3':{
       id: "3",
       name: "Pikachu",
       company: "google",
@@ -41,8 +42,9 @@ const Maker = ({ authService }) => {
       message: "go for it",
       fileName: "pikachu",
       fileURL: null,
-    },
-  ]);
+    }
+  });
+ 
 
   const history = useHistory();
   const onLogout = () => {
@@ -57,15 +59,27 @@ const Maker = ({ authService }) => {
     });
   });
 
-  const addCard = (card)=>{
-    const updates = [...cards,card];
-    setCards(updates);
+
+  const createOrUpdate = (card)=> {
+    //setCards 할때의 cards의 상태를 불러와서
+    setCards(cards =>{
+      const updated = {...cards};
+      updated[card.id] = card;
+      return updated;
+    });
+  }
+  const deleteCard = (card)=>{
+    setCards(cards =>{
+      const updated = {...cards};
+      delete updated[card.id];
+      return updated;
+    });
   }
   return (
     <section className={styles.maker}>
       <Header onLogout={onLogout} />
       <div className={styles.container}>
-        <Editor cards={cards} addCard={addCard}/>
+        <Editor cards={cards} addCard={createOrUpdate} updateCard={createOrUpdate} deleteCard={deleteCard}/>
         <Preview cards={cards} />
       </div>
       <Footer />

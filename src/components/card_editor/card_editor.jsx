@@ -4,7 +4,7 @@ import Button from "../button/button";
 import styles from "./card_editor.module.css";
 
 
-const Card_editor = ({ card }) => {
+const CardEditor = ({ card,updateCard, deleteCard }) => {
   const {
     name,
     company,
@@ -16,21 +16,34 @@ const Card_editor = ({ card }) => {
     fileURL,
   } = card;
 
-  const onSubmit = (event)=>{
+  const onChange= (event)=>{
+    if(event.currentTarget === null){
+      return;
+    }
+    event.preventDefault();
+    updateCard({
+      ...card,
+      [event.currentTarget.name]: event.currentTarget.value,
+
+    })
+  };
+
+  const onSubmit = ()=>{
    
+   deleteCard(card);
   };
   return (
     <form className={styles.form}>
-      <input className={styles.input} type="text" name="name" value={name}/>
-      <input className={styles.input} type="text" name="company" value={company}/>
-      <select className={styles.select} type="text" name="name" value={theme}>
+      <input className={styles.input} type="text" name="name" value={name} onChange={onChange}/>
+      <input className={styles.input} type="text" name="company" value={company} onChange={onChange}/>
+      <select className={styles.select} type="text" name="theme" value={theme} onChange={onChange}>
         <option value="light">light</option>
         <option value="dark">dark</option>
         <option value="colorful">colorful</option>
       </select>
-      <input className={styles.input} type="text" name="title" value={title}/>
-      <input className={styles.input} type="text" name="email" value={email}/>
-      <textarea className={styles.textarea} name="message" value={message}></textarea>
+      <input className={styles.input} type="text" name="title" value={title} onChange={onChange}/>
+      <input className={styles.input} type="text" name="email" value={email} onChange={onChange}/>
+      <textarea className={styles.textarea} name="message" value={message} onChange={onChange}></textarea>
       <div className={styles.fileInput}>
         <ImageInput/>
       </div>
@@ -39,4 +52,4 @@ const Card_editor = ({ card }) => {
   );
 };
 
-export default Card_editor;
+export default CardEditor;

@@ -23,7 +23,6 @@ const Card = ({ card }) => {
         <h1 className={styles.title}>{title}</h1>
         <p className={styles.name}>{name}</p>
         <p className={styles.company}>{company}</p>
-        <p className={styles.theme}>{theme}</p>
         <p className={styles.email}>{email}</p>
         <p className={styles.message}>{message}</p>
       </div>
