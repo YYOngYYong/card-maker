@@ -6,7 +6,7 @@ import Header from "../header/header";
 import Preview from "../preiview/preview";
 import styles from "./maker.module.css";
 
-const Maker = ({ authService }) => {
+const Maker = ({FileInput, authService }) => {
   //Editor, Preview를 상태관리, 수정하는 함수들이 여기 들어와야 함.
   const [cards, setCards] = useState({
     '1':{
@@ -79,7 +79,7 @@ const Maker = ({ authService }) => {
     <section className={styles.maker}>
       <Header onLogout={onLogout} />
       <div className={styles.container}>
-        <Editor cards={cards} addCard={createOrUpdate} updateCard={createOrUpdate} deleteCard={deleteCard}/>
+        <Editor FileInput={FileInput} cards={cards} addCard={createOrUpdate} updateCard={createOrUpdate} deleteCard={deleteCard}/>
         <Preview cards={cards} />
       </div>
       <Footer />
